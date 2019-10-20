@@ -1,0 +1,98 @@
+package ru.bslab.test.features.flow.main
+
+import activitystarter.MakeActivityStarter
+import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.android.synthetic.main.activity_main.*
+import ru.bslab.test.R
+import ru.bslab.test.features.base.BaseActivity
+import ru.bslab.test.features.base.DialogType
+import ru.bslab.test.features.base.MainActivityRouter
+import javax.inject.Inject
+
+@MakeActivityStarter
+class MainActivity : BaseActivity(),
+    MainMvpView, MainActivityRouter {
+
+    override fun layoutId() = R.layout.activity_main
+
+    @Inject
+    lateinit var presenter: MainPresenter
+
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activityComponent().inject(this)
+        presenter.attachView(this)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun popBackStack() {
+        navController.popBackStack()
+    }
+
+    override fun configureViews() {
+        setSupportActionBar(toolbar)
+
+        navController = findNavController(R.id.fragmentContainer)
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home, R.id.nav_card
+            ), drawer_layout
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+    }
+
+    override fun openHome() {
+        presenter.navigateToHome()
+    }
+
+    override fun backToHome() {
+        navController.navigate(R.id.nav_home)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
+    }
+
+    override fun navigateToHome() {
+        presenter.navigateToHome()
+    }
+
+    override fun presentDialog(message: String, type: DialogType) {
+
+        val builder = MaterialAlertDialogBuilder(this@MainActivity)
+        builder
+            .setIcon(when(type) {
+                DialogType.Error -> R.drawable.ic_error
+                DialogType.Success -> R.drawable.icon_good
+            })
+            .setTitle(when(type) {
+                DialogType.Error -> "Ошибка"
+                DialogType.Success -> "Успешно"
+            })
+            .setMessage(message)
+            .setPositiveButton("ОК", null)
+            .show()
+    }
+
+    override fun changeTitle(title: String?) {
+        title?.let {
+            toolbar.title = it
+        }
+    }
+
+}
