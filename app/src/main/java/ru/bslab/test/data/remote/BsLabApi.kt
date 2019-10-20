@@ -7,6 +7,6 @@ import ru.bslab.test.data.models.BsLabTestResponse
 interface BsLabApi {
 
     @HTTP(method = "GET", path = "/", hasBody = false)
-    fun getIpAddress(): Single<BsLabTestResponse>
+    fun testRequest(): Single<BsLabTestResponse>
 
 }
