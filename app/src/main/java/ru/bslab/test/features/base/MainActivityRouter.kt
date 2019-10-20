@@ -4,4 +4,6 @@ interface MainActivityRouter {
 
     fun navigateToHome()
 
+    fun navigateToCard()
+
 }

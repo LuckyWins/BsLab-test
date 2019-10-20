@@ -16,7 +16,6 @@ constructor(private val preferencesHelper: PreferencesHelper,
         super.attachView(mvpView)
 
         mvpView.configureViews()
-        //mvpView.openHome()
     }
 
     fun navigateToBack() {
@@ -25,6 +24,10 @@ constructor(private val preferencesHelper: PreferencesHelper,
 
     fun navigateToHome() {
         mvpView?.backToHome()
+    }
+
+    fun navigateToCard() {
+        mvpView?.openCard()
     }
 
 }

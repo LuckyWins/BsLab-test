@@ -4,6 +4,6 @@ import ru.bslab.test.features.base.MvpView
 
 interface HomeMvpView : MvpView {
 
-
+    fun openCard()
 
 }

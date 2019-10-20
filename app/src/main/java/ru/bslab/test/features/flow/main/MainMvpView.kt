@@ -8,10 +8,10 @@ interface MainMvpView : MvpView {
 
     fun openHome()
 
+    fun openCard()
+
     fun popBackStack()
 
     fun backToHome()
-
-    fun changeTitle(title: String?)
 
 }

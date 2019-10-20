@@ -25,7 +25,6 @@ class MainActivity : BaseActivity(),
     lateinit var presenter: MainPresenter
 
     private lateinit var navController: NavController
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +33,7 @@ class MainActivity : BaseActivity(),
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun popBackStack() {
@@ -42,21 +41,18 @@ class MainActivity : BaseActivity(),
     }
 
     override fun configureViews() {
-        setSupportActionBar(toolbar)
-
         navController = findNavController(R.id.fragmentContainer)
 
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home, R.id.nav_card
-            ), drawer_layout
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        setupActionBarWithNavController(navController)
 
     }
 
     override fun openHome() {
         presenter.navigateToHome()
+    }
+
+    override fun openCard() {
+        navController.navigate(R.id.nav_card)
     }
 
     override fun backToHome() {
@@ -70,6 +66,10 @@ class MainActivity : BaseActivity(),
 
     override fun navigateToHome() {
         presenter.navigateToHome()
+    }
+
+    override fun navigateToCard() {
+        presenter.navigateToCard()
     }
 
     override fun presentDialog(message: String, type: DialogType) {
@@ -87,12 +87,6 @@ class MainActivity : BaseActivity(),
             .setMessage(message)
             .setPositiveButton("ОК", null)
             .show()
-    }
-
-    override fun changeTitle(title: String?) {
-        title?.let {
-            toolbar.title = it
-        }
     }
 
 }

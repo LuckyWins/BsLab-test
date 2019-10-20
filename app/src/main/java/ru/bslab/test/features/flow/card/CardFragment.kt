@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class CardFragment : BaseFragment(), CardMvpView {
 
-    override fun layoutId() = R.layout.fragment_home
+    override fun layoutId() = R.layout.fragment_card
 
     @Inject
     lateinit var presenter: CardPresenter
