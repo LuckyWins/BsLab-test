@@ -28,9 +28,9 @@ class HomeFragment : BaseFragment(), HomeMvpView {
     }
 
     override fun configureRecyclerView() {
-        providersRecyclerView.layoutManager = LinearLayoutManager(context)
-        providersRecyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        providersRecyclerView.adapter = homeAdapter
+        rvProviders.layoutManager = LinearLayoutManager(context)
+        //rvProviders.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        rvProviders.adapter = homeAdapter
     }
 
     override fun showData(providers: List<BsLabProvider>) {

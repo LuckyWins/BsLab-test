@@ -3,6 +3,8 @@ package ru.bslab.test.features.flow.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.list_item_home_provider.view.*
@@ -33,11 +35,19 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
     override fun onBindViewHolder(holder: HomeAdapterViewHolder, position: Int) {
         items?.let {
             val provider = it[position]
+            val childLayoutManager = LinearLayoutManager(holder.recyclerView.context, RecyclerView.HORIZONTAL, false)
+            holder.recyclerView.apply {
+                layoutManager = childLayoutManager
+                adapter = CardsAdapter(provider.giftCards)
+
+            }
             holder.bind(provider)
         }
     }
 
     class HomeAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val recyclerView : RecyclerView = itemView.rvCards
 
         fun bind(value: BsLabProvider) {
             itemView.title.text = value.title
