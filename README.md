@@ -23,6 +23,6 @@ OkHttpClient.Builder()
 
 ## Screenshots:
 
-| [![ScreenShot](https://raw.githubusercontent.com/LuckyWins/BsLab-test/master/screenshots/HomeFragment.png)](HomeFragment)  | [![ScreenShot](https://raw.githubusercontent.com/LuckyWins/BsLab-test/master/screenshots/CardFragment.png)](CardFragment) |
+| [![ScreenShot](https://raw.githubusercontent.com/LuckyWins/BsLab-test/master/screenshots/HomeFragment.png)]  | [![ScreenShot](https://raw.githubusercontent.com/LuckyWins/BsLab-test/master/screenshots/CardFragment.png)] |
 |:---:|:---:|
 | HomeFragment | CardFragment |
