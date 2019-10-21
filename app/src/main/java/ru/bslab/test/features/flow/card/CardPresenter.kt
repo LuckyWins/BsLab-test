@@ -15,7 +15,7 @@ constructor(val preferencesHelper: PreferencesHelper,
     override fun attachView(mvpView: CardMvpView) {
         super.attachView(mvpView)
 
-
+        mvpView.configureViews(mvpView.args.card)
     }
 
 }

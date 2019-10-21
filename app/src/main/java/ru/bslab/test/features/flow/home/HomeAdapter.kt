@@ -23,7 +23,7 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun subscribeToClick() = clickObserver
+    fun subscribeToClickCards() = clickObserver
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_home_provider, parent, false)
@@ -38,7 +38,9 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder>() {
             val childLayoutManager = LinearLayoutManager(holder.recyclerView.context, RecyclerView.HORIZONTAL, false)
             holder.recyclerView.apply {
                 layoutManager = childLayoutManager
-                adapter = CardsAdapter(provider.giftCards)
+                val cardAdapter = CardsAdapter(provider.giftCards)
+                cardAdapter.subscribeToClickCard().subscribe { card -> clickObserver.onNext(card) }
+                adapter = cardAdapter
 
             }
             holder.bind(provider)

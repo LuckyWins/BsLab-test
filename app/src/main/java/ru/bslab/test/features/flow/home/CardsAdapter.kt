@@ -20,7 +20,7 @@ class CardsAdapter(private var items : List<BsLabCard>?): RecyclerView.Adapter<C
         notifyDataSetChanged()
     }
 
-    fun subscribeToClick() = clickObserver
+    fun subscribeToClickCard() = clickObserver
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardsAdapterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_home_card, parent, false)
@@ -33,6 +33,9 @@ class CardsAdapter(private var items : List<BsLabCard>?): RecyclerView.Adapter<C
         items?.let {
             val card = it[position]
             holder.bind(card)
+            holder.itemView.cardItem.setOnClickListener {
+                clickObserver.onNext(card)
+            }
         }
     }
 

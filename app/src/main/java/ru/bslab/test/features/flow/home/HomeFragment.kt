@@ -5,8 +5,10 @@ import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hannesdorfmann.fragmentargs.FragmentArgs
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_home.*
 import ru.bslab.test.R
+import ru.bslab.test.data.models.BsLabCard
 import ru.bslab.test.data.models.BsLabProvider
 import ru.bslab.test.features.base.BaseFragment
 import ru.bslab.test.features.base.MainActivityRouter
@@ -21,10 +23,17 @@ class HomeFragment : BaseFragment(), HomeMvpView {
 
     private val homeAdapter = HomeAdapter()
 
+    override fun onCardClick() = homeAdapter.subscribeToClickCards()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FragmentArgs.inject(this)
         fragmentComponent().inject(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.attachButtons(this)
     }
 
     override fun configureRecyclerView() {
@@ -47,8 +56,8 @@ class HomeFragment : BaseFragment(), HomeMvpView {
         presenter.detachView()
     }
 
-    override fun openCard() {
-        (activity as? MainActivityRouter)?.navigateToCard()
+    override fun openCard(card: BsLabCard) {
+        (activity as? MainActivityRouter)?.navigateToCard(card)
     }
 
 }

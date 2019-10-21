@@ -2,6 +2,7 @@ package ru.bslab.test.features.flow.main
 
 import activitystarter.MakeActivityStarter
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.bslab.test.R
+import ru.bslab.test.data.models.BsLabCard
 import ru.bslab.test.features.base.BaseActivity
 import ru.bslab.test.features.base.DialogType
 import ru.bslab.test.features.base.MainActivityRouter
@@ -51,8 +53,9 @@ class MainActivity : BaseActivity(),
         presenter.navigateToHome()
     }
 
-    override fun openCard() {
-        navController.navigate(R.id.nav_card)
+    override fun openCard(card: BsLabCard) {
+        val bundle = bundleOf("card" to card)
+        navController.navigate(R.id.nav_card, bundle)
     }
 
     override fun backToHome() {
@@ -68,8 +71,8 @@ class MainActivity : BaseActivity(),
         presenter.navigateToHome()
     }
 
-    override fun navigateToCard() {
-        presenter.navigateToCard()
+    override fun navigateToCard(card: BsLabCard) {
+        presenter.navigateToCard(card)
     }
 
     override fun presentDialog(message: String, type: DialogType) {

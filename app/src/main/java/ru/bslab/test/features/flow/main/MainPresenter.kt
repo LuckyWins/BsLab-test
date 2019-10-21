@@ -2,6 +2,7 @@ package ru.bslab.test.features.flow.main
 
 import ru.bslab.test.data.DataManager
 import ru.bslab.test.data.local.PreferencesHelper
+import ru.bslab.test.data.models.BsLabCard
 import ru.bslab.test.features.base.BasePresenter
 import ru.bslab.test.injection.ConfigPersistent
 import javax.inject.Inject
@@ -26,8 +27,8 @@ constructor(private val preferencesHelper: PreferencesHelper,
         mvpView?.backToHome()
     }
 
-    fun navigateToCard() {
-        mvpView?.openCard()
+    fun navigateToCard(card: BsLabCard) {
+        mvpView?.openCard(card)
     }
 
 }

@@ -27,6 +27,14 @@ constructor(val preferencesHelper: PreferencesHelper,
         loadProviders()
     }
 
+    fun attachButtons(mvpView: HomeMvpView) {
+        mvpView.onCardClick()
+            .subscribe {
+                //Timber.d("Card clicked. info: $it")
+                mvpView.openCard(it)
+            }.addTo(compositeDisposable)
+    }
+
     private fun loadProviders() {
         dataManager.testRequest()
             .doOnSubscribe { mvpView?.showProgressView() }
