@@ -19,6 +19,7 @@ val myCache = Cache(context.cacheDir, cacheSize)
 OkHttpClient.Builder()
   .cache(myCache)
 ```
+Если говорить о кешировании картинок, то в Glide тоже существует возможность настроить кеширование
 
 ## Screenshots:
 
