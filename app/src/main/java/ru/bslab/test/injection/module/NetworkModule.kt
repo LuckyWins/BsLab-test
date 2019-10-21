@@ -17,6 +17,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import ru.bslab.test.BuildConfig
+import ru.bslab.test.data.local.PreferencesHelper
 import timber.log.Timber
 import javax.inject.Named
 import javax.inject.Singleton
@@ -24,14 +25,16 @@ import javax.inject.Singleton
 @Module
 class NetworkModule(private val context: Context) {
 
-    private fun getNewBsLabUrl() = "https://imya.bslab.ru/"
+    private fun getBsLabUrl(preferencesHelper: PreferencesHelper) = preferencesHelper.bsLabUrl
+
+    private fun getNewBsLabUrl(preferencesHelper: PreferencesHelper) = preferencesHelper.bsLabNewUrl
 
     @Provides
     @Singleton
     @Named("bslab")
-    internal fun provideRetrofit(@Named("general") okHttpClient: OkHttpClient, moshi: Moshi): Retrofit =
+    internal fun provideRetrofit(@Named("general") okHttpClient: OkHttpClient, moshi: Moshi, preferencesHelper: PreferencesHelper): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://imya.bslab.ru/")
+            .baseUrl(getBsLabUrl(preferencesHelper))
             .client(okHttpClient)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -41,9 +44,9 @@ class NetworkModule(private val context: Context) {
     @Provides
     @Singleton
     @Named("bslab-second")
-    internal fun provideBsLabRetrofit(@Named("general") okHttpClient: OkHttpClient, moshi: Moshi): Retrofit =
+    internal fun provideBsLabRetrofit(@Named("general") okHttpClient: OkHttpClient, moshi: Moshi, preferencesHelper: PreferencesHelper): Retrofit =
         Retrofit.Builder()
-            .baseUrl(getNewBsLabUrl())
+            .baseUrl(getNewBsLabUrl(preferencesHelper))
             .client(okHttpClient)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
