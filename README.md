@@ -9,5 +9,7 @@ Single-Activity app
 - как при этом организовать кеширование для загружаемых данных?
 
 ## Screenshots:
-![ScreenShot](https://github.com/LuckyWins/BsLab-test/blob/master/screenshots/HomeFragment.png?raw=true)
-![ScreenShot](https://github.com/LuckyWins/BsLab-test/blob/master/screenshots/CardFragment.png?raw=true)
+
+| [![ScreenShot](https://github.com/LuckyWins/BsLab-test/blob/master/screenshots/HomeFragment.png?raw=true)](HomeFragment)  | [![ScreenShot](https://github.com/LuckyWins/BsLab-test/blob/master/screenshots/CardFragment.png?raw=true)](CardFragment) |
+|:---:|:---:|
+| HomeFragment | CardFragment |
